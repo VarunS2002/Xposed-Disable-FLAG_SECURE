@@ -35,10 +35,8 @@ class DisableFlagSecure : IXposedHookLoadPackage {
      */
     @Suppress("KDocUnresolvedReference")
     override fun handleLoadPackage(lpparam: LoadPackageParam?) {
-        if (lpparam != null) {
-            // Log Package Name
-            XposedBridge.log("Disable-Flag_Secure Loaded app: " + lpparam.packageName)
-        }
+        // Log Package Name
+        XposedBridge.log("Disabled FLAG_SECURE for: " + (lpparam?.packageName ?: "null"))
 
         XposedHelpers.findAndHookMethod(
             Window::class.java, "setFlags", Int::class.javaPrimitiveType, Int::class.javaPrimitiveType,
