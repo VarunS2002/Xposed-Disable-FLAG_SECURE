@@ -9,9 +9,15 @@
             android:theme="@style/AppTheme"
             android:allowBackup="true"
             android:fullBackupContent="@xml/backup_descriptor">
-        <meta-data android:name="xposedmodule" android:value="true" />
-        <meta-data android:name="xposeddescription" android:value="@string/xposed_description" />
-        <meta-data android:name="xposedminversion" android:value="30" />
+        <meta-data
+                android:name="xposedmodule"
+                android:value="true"/>
+        <meta-data
+                android:name="xposeddescription"
+                android:value="@string/xposed_description"/>
+        <meta-data
+                android:name="xposedminversion"
+                android:value="30"/>
     </application>
 
 </manifest>
