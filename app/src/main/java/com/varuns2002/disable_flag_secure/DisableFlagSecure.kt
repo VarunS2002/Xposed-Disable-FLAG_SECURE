@@ -29,13 +29,12 @@ class DisableFlagSecure : IXposedHookLoadPackage {
 
     /**
      * This method is called when an app is loaded. It's called very early, even before
-     * [Application.onCreate] is called.
+     * Application.onCreate is called.
      * Modules can set up their app-specific hooks here.
      *
      * @param lpparam Information about the app.
      * @throws Throwable Everything the callback throws is caught and logged.
      */
-    @Suppress("KDocUnresolvedReference")
     override fun handleLoadPackage(lpparam: LoadPackageParam?) {
         // Log Package Name
         XposedBridge.log("Disabled FLAG_SECURE for: " + (lpparam?.packageName ?: "null"))
