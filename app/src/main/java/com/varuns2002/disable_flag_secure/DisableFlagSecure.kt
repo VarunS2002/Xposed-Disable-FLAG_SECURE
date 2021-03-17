@@ -12,6 +12,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam
 class DisableFlagSecure : IXposedHookLoadPackage {
 
     private val mRemoveSecureFlagHook: XC_MethodHook = object : XC_MethodHook() {
+        @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
             var flags: Int = param.args[0] as Int
             flags = flags and WindowManager.LayoutParams.FLAG_SECURE.inv()
@@ -20,6 +21,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
     }
 
     private val mRemoveSetSecureHook: XC_MethodHook = object : XC_MethodHook() {
+        @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
             param.args[0] = false
         }
