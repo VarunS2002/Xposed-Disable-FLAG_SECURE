@@ -1,10 +1,12 @@
 package com.varuns2002.disable_flag_secure
 
+import android.os.Build
 import android.view.SurfaceView
 import android.view.Window
 import android.view.WindowManager
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
+import de.robv.android.xposed.XC_MethodReplacement
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam
@@ -48,5 +50,29 @@ class DisableFlagSecure : IXposedHookLoadPackage {
             SurfaceView::class.java, "setSecure", Boolean::class.javaPrimitiveType,
             mRemoveSetSecureHook
         )
+
+        if (loadPackageParam?.packageName.equals("android")) {
+            try {
+                val windowsState = XposedHelpers.findClass("com.android.server.wm.WindowState", loadPackageParam?.classLoader)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    XposedHelpers.findAndHookMethod(
+                        windowsState,
+                        "isSecureLocked",
+                        XC_MethodReplacement.returnConstant(false)
+                    )
+                } else {
+                    XposedHelpers.findAndHookMethod(
+                        "com.android.server.wm.WindowManagerService",
+                        loadPackageParam?.classLoader,
+                        "isSecureLocked",
+                        windowsState,
+                        XC_MethodReplacement.returnConstant(false)
+                    )
+                }
+            } catch (error: Throwable) {
+                XposedBridge.log("Disable-FLAG_SECURE: $error")
+            }
+
+        }
     }
 }
