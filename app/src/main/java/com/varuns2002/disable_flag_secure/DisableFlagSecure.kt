@@ -32,12 +32,12 @@ class DisableFlagSecure : IXposedHookLoadPackage {
      * Application.onCreate is called.
      * Modules can set up their app-specific hooks here.
      *
-     * @param lpparam Information about the app.
+     * @param loadPackageParam Information about the app.
      * @throws Throwable Everything the callback throws is caught and logged.
      */
-    override fun handleLoadPackage(lpparam: LoadPackageParam?) {
+    override fun handleLoadPackage(loadPackageParam: LoadPackageParam?) {
         // Log Package Name
-        XposedBridge.log("Disabled FLAG_SECURE for: " + (lpparam?.packageName ?: "null"))
+        XposedBridge.log("Disabled FLAG_SECURE for: " + (loadPackageParam?.packageName ?: "null"))
 
         XposedHelpers.findAndHookMethod(
             Window::class.java, "setFlags", Int::class.javaPrimitiveType, Int::class.javaPrimitiveType,
