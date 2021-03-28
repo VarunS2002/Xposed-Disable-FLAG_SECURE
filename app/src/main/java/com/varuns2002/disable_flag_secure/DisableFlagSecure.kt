@@ -4,6 +4,7 @@ import android.os.Build
 import android.view.SurfaceView
 import android.view.Window
 import android.view.WindowManager
+import androidx.annotation.Keep
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
@@ -11,8 +12,10 @@ import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam
 
+@Keep
 class DisableFlagSecure : IXposedHookLoadPackage {
 
+    @Keep
     private val mRemoveSecureFlagHook: XC_MethodHook = object : XC_MethodHook() {
         @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
@@ -22,6 +25,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
         }
     }
 
+    @Keep
     private val mRemoveSetSecureHook: XC_MethodHook = object : XC_MethodHook() {
         @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
@@ -37,6 +41,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
      * @param loadPackageParam Information about the app.
      * @throws Throwable Everything the callback throws is caught and logged.
      */
+    @Keep
     override fun handleLoadPackage(loadPackageParam: LoadPackageParam?) {
         // Log Package Name
         XposedBridge.log("Disabled FLAG_SECURE for: " + (loadPackageParam?.packageName ?: "null"))
