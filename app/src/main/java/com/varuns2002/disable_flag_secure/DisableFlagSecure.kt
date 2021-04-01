@@ -1,10 +1,9 @@
 package com.varuns2002.disable_flag_secure
 
-import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.view.SurfaceView
 import android.view.Window
-import android.view.WindowManager
-import androidx.annotation.Keep
+import android.view.WindowManager.LayoutParams.FLAG_SECURE
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
@@ -12,20 +11,17 @@ import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam
 
-@Keep
 class DisableFlagSecure : IXposedHookLoadPackage {
 
-    @Keep
     private val mRemoveSecureFlagHook: XC_MethodHook = object : XC_MethodHook() {
         @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
             var flags: Int = param.args[0] as Int
-            flags = flags and WindowManager.LayoutParams.FLAG_SECURE.inv()
+            flags = flags and FLAG_SECURE.inv()
             param.args[0] = flags
         }
     }
 
-    @Keep
     private val mRemoveSetSecureHook: XC_MethodHook = object : XC_MethodHook() {
         @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
@@ -41,7 +37,6 @@ class DisableFlagSecure : IXposedHookLoadPackage {
      * @param loadPackageParam Information about the app.
      * @throws Throwable Everything the callback throws is caught and logged.
      */
-    @Keep
     override fun handleLoadPackage(loadPackageParam: LoadPackageParam?) {
         // Log Package Name
         XposedBridge.log("Disabled FLAG_SECURE for: " + (loadPackageParam?.packageName ?: "null"))
@@ -58,8 +53,9 @@ class DisableFlagSecure : IXposedHookLoadPackage {
 
         if (loadPackageParam?.packageName.equals("android")) {
             try {
-                val windowsState = XposedHelpers.findClass("com.android.server.wm.WindowState", loadPackageParam?.classLoader)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val windowsState =
+                    XposedHelpers.findClass("com.android.server.wm.WindowState", loadPackageParam?.classLoader)
+                if (SDK_INT >= 30) {
                     XposedHelpers.findAndHookMethod(
                         windowsState,
                         "isSecureLocked",
