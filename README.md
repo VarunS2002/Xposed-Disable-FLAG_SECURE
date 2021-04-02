@@ -6,6 +6,7 @@ Xposed Module to Disable `FLAG_SECURE`, enabling screenshots and recording in ap
 
 ## [Downloads](https://github.com/VarunS2002/Xposed-Disable-FLAG_SECURE/releases/)
 ## [Xposed Repository](https://repo.xposed.info/module/com.varuns2002.disable_flag_secure)
+## [LSPosed Repository](https://github.com/Xposed-Modules-Repo/com.varuns2002.disable_flag_secure)
 
 >[![APK: v1.0.0](https://img.shields.io/badge/APK-v1.0.0-brightgreen)](https://github.com/VarunS2002/Xposed-Disable-FLAG_SECURE/releases/download/1.0.0/Xposed-Disable-FLAG_SECURE_1.0.0.apk)
 ![Build: passing](https://img.shields.io/badge/build-passing-brightgreen)
