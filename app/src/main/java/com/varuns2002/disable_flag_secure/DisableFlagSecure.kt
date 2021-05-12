@@ -1,9 +1,11 @@
 package com.varuns2002.disable_flag_secure
 
-import android.os.Build.VERSION.SDK_INT
 import android.view.SurfaceView
 import android.view.Window
-import android.view.WindowManager.LayoutParams.FLAG_SECURE
+import android.view.Display
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager.LayoutParams
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XC_MethodReplacement
@@ -17,7 +19,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
         @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
             var flags: Int = param.args[0] as Int
-            flags = flags and FLAG_SECURE.inv()
+            flags = flags and LayoutParams.FLAG_SECURE.inv()
             param.args[0] = flags
         }
     }
@@ -26,6 +28,14 @@ class DisableFlagSecure : IXposedHookLoadPackage {
         @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
             param.args[0] = false
+        }
+    }
+
+    private val mRemoveSecureParamHook: XC_MethodHook = object : XC_MethodHook() {
+        @Throws(Throwable::class)
+        override fun beforeHookedMethod(param: MethodHookParam) {
+            val params = param.args[1] as LayoutParams
+            params.flags = params.flags and LayoutParams.FLAG_SECURE.inv()
         }
     }
 
@@ -51,29 +61,61 @@ class DisableFlagSecure : IXposedHookLoadPackage {
             mRemoveSetSecureHook
         )
 
-        if (loadPackageParam?.packageName.equals("android")) {
-            try {
-                val windowsState =
-                    XposedHelpers.findClass("com.android.server.wm.WindowState", loadPackageParam?.classLoader)
-                if (SDK_INT >= 30) {
-                    XposedHelpers.findAndHookMethod(
-                        windowsState,
-                        "isSecureLocked",
-                        XC_MethodReplacement.returnConstant(false)
-                    )
-                } else {
-                    XposedHelpers.findAndHookMethod(
-                        "com.android.server.wm.WindowManagerService",
-                        loadPackageParam?.classLoader,
-                        "isSecureLocked",
-                        windowsState,
-                        XC_MethodReplacement.returnConstant(false)
-                    )
-                }
-            } catch (error: Throwable) {
-                XposedBridge.log("Disable-FLAG_SECURE: $error")
-            }
+        try {
+            val windowsState =
+                XposedHelpers.findClass("com.android.server.wm.WindowState", loadPackageParam?.classLoader)
+            XposedHelpers.findAndHookMethod(windowsState, "isSecureLocked", XC_MethodReplacement.returnConstant(false))
+        } catch (error: Throwable) {
+            XposedBridge.log("Disable-FLAG_SECURE: $error")
+        }
 
+        try {
+            val windowsState =
+                XposedHelpers.findClass("com.android.server.wm.WindowState", loadPackageParam?.classLoader)
+            XposedHelpers.findAndHookMethod(
+                "com.android.server.wm.WindowManagerService",
+                loadPackageParam?.classLoader,
+                "isSecureLocked",
+                windowsState,
+                XC_MethodReplacement.returnConstant(false)
+            )
+        } catch (error: Throwable) {
+            XposedBridge.log("Disable-FLAG_SECURE: $error")
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(
+                "android.view.WindowManagerGlobal", loadPackageParam!!.classLoader, "addView",
+                View::class.java,
+                ViewGroup.LayoutParams::class.java,
+                Display::class.java,
+                Window::class.java, mRemoveSecureParamHook
+            )
+        } catch (error: Throwable) {
+            XposedBridge.log("Disable-FLAG_SECURE: $error")
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(
+                "android.view.WindowManagerGlobal", loadPackageParam!!.classLoader, "addView",
+                View::class.java,
+                ViewGroup.LayoutParams::class.java,
+                Display::class.java,
+                Window::class.java,
+                Int::class.javaPrimitiveType, mRemoveSecureParamHook
+            )
+        } catch (error: Throwable) {
+            XposedBridge.log("Disable-FLAG_SECURE: $error")
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(
+                "android.view.WindowManagerGlobal", loadPackageParam!!.classLoader, "updateViewLayout",
+                View::class.java,
+                ViewGroup.LayoutParams::class.java, mRemoveSecureParamHook
+            )
+        } catch (error: Throwable) {
+            XposedBridge.log("Disable-FLAG_SECURE: $error")
         }
     }
 }
