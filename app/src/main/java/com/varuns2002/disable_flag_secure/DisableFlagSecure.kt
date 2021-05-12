@@ -15,6 +15,8 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam
 
 class DisableFlagSecure : IXposedHookLoadPackage {
 
+    private val debug: Boolean = false
+
     private val mRemoveSecureFlagHook: XC_MethodHook = object : XC_MethodHook() {
         @Throws(Throwable::class)
         override fun beforeHookedMethod(param: MethodHookParam) {
@@ -66,7 +68,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
                 XposedHelpers.findClass("com.android.server.wm.WindowState", loadPackageParam?.classLoader)
             XposedHelpers.findAndHookMethod(windowsState, "isSecureLocked", XC_MethodReplacement.returnConstant(false))
         } catch (error: Throwable) {
-            XposedBridge.log("Disable-FLAG_SECURE: $error")
+            if (debug) XposedBridge.log("Disable-FLAG_SECURE: $error")
         }
 
         try {
@@ -80,7 +82,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
                 XC_MethodReplacement.returnConstant(false)
             )
         } catch (error: Throwable) {
-            XposedBridge.log("Disable-FLAG_SECURE: $error")
+            if (debug) XposedBridge.log("Disable-FLAG_SECURE: $error")
         }
 
         try {
@@ -92,7 +94,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
                 Window::class.java, mRemoveSecureParamHook
             )
         } catch (error: Throwable) {
-            XposedBridge.log("Disable-FLAG_SECURE: $error")
+            if (debug) XposedBridge.log("Disable-FLAG_SECURE: $error")
         }
 
         try {
@@ -105,7 +107,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
                 Int::class.javaPrimitiveType, mRemoveSecureParamHook
             )
         } catch (error: Throwable) {
-            XposedBridge.log("Disable-FLAG_SECURE: $error")
+            if (debug) XposedBridge.log("Disable-FLAG_SECURE: $error")
         }
 
         try {
@@ -115,7 +117,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
                 ViewGroup.LayoutParams::class.java, mRemoveSecureParamHook
             )
         } catch (error: Throwable) {
-            XposedBridge.log("Disable-FLAG_SECURE: $error")
+            if (debug) XposedBridge.log("Disable-FLAG_SECURE: $error")
         }
     }
 }
