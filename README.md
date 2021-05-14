@@ -60,16 +60,27 @@ Xposed Module to Disable `FLAG_SECURE`, enabling screenshots and recording in ap
 
 - Apps Tested on:
     - Amazon Prime Video (Screenshots and Screen Recording of Media)
-    - Netflix (Screenshots and Screen Recording of Media)
+    - Netflix (Screenshots and Screen Recording of Media) (read additional info below)
     - Telegram (Secret Chat & Disappearing Media)
     - Reddit (Anonymous Browsing Mode)
     - Google Chrome (Incognito Mode)
-    - Brave Browser (Incognito Mode)
-
-- Apps Not Working on:
-    - Disney+
+    - Brave Browser (Incognito Mode):
+    - Disney+ (Screenshots and Screen Recording of Media) (read additional info below)
 
 - This app is a fork of the existing apps but with better compatibility:
     - https://github.com/veeti/DisableFlagSecure/
     - https://github.com/LSPosed/DisableFlagSecure/
     - https://gitlab.com/azhao12345/disableflagsecure/
+
+
+### Additional Info on DRM encrypted content (Disney+, Netflix)
+
+When playing DRM encrypted content, most devices will use hardware decryption capabilites.
+This hardware decrytion will push the video directly onto the screen, bypassing any screenshots/screenshare/recording functionality.
+
+One possible solution is to disable this hardware decryption by installing the Magisk module [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboemcryptodisabler).
+This will force the device to not use hardware decryption and in combination with this module will enable screenshots, screenshare and recording.
+
+Installing this module might have unintended consequences, such as lowered video quality. Read more [here](https://forum.xda-developers.com/t/magisk-module-liboemcrypto-disabler-for-drm-protected-content-netflix-my5-etc.3794393).
+
+In the end it's your choice whether to use it, but as it's systemless, testing it is recommended, as removing the module will revert back to the previous state.
