@@ -2,7 +2,8 @@
 
 # Xposed-Disable-FLAG_SECURE
 
-Xposed Module to Disable `FLAG_SECURE`, enabling screenshots and recording in apps that normally wouldn't allow it.
+Xposed Module to Disable `FLAG_SECURE`, enabling screenshots, screen sharing and recording in apps that normally
+wouldn't allow it.
 
 ## [Downloads](https://github.com/VarunS2002/Xposed-Disable-FLAG_SECURE/releases/)
 
@@ -59,28 +60,39 @@ Xposed Module to Disable `FLAG_SECURE`, enabling screenshots and recording in ap
 
 
 - Apps Tested on:
-    - Amazon Prime Video (Screenshots and Screen Recording of Media)
-    - Netflix (Screenshots and Screen Recording of Media) (read additional info below)
+    - Amazon Prime Video
+    - Netflix ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
+    - Disney+ ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
     - Telegram (Secret Chat & Disappearing Media)
     - Reddit (Anonymous Browsing Mode)
     - Google Chrome (Incognito Mode)
-    - Brave Browser (Incognito Mode):
-    - Disney+ (Screenshots and Screen Recording of Media) (read additional info below)
+    - Brave Browser (Incognito Mode)
+
+- This module may work on other apps too with or
+  without [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboemcryptodisabler).
+  ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
+
+- You can contribute names of apps that are working and are not listed here, so I can add it to the list.
+
+- If you face any issue or have a suggestion then feel free to open an issue.
 
 - This app is a fork of the existing apps but with better compatibility:
     - https://github.com/veeti/DisableFlagSecure/
     - https://github.com/LSPosed/DisableFlagSecure/
     - https://gitlab.com/azhao12345/disableflagsecure/
 
+### Additional Information on DRM encrypted content
 
-### Additional Info on DRM encrypted content (Disney+, Netflix)
+This is applicable only for some apps on some devices. If you aren't facing any issues, you can ignore these
+instructions.
 
-When playing DRM encrypted content, most devices will use hardware decryption capabilites.
-This hardware decrytion will push the video directly onto the screen, bypassing any screenshots/screenshare/recording functionality.
+When playing DRM encrypted content, most devices will use hardware decryption capabilities. This hardware decryption
+will push the video directly onto the screen, bypassing any screenshots/screenshare/recording functionality.
 
-One possible solution is to disable this hardware decryption by installing the Magisk module [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboemcryptodisabler).
-This will force the device to not use hardware decryption and in combination with this module will enable screenshots, screenshare and recording.
+One possible solution is to disable this hardware decryption by installing the Magisk
+module [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboemcryptodisabler). This will force the
+device to not use hardware decryption and in combination with this module will enable screenshots, screen sharing and
+recording.
 
-Installing this module might have unintended consequences, such as lowered video quality. Read more [here](https://forum.xda-developers.com/t/magisk-module-liboemcrypto-disabler-for-drm-protected-content-netflix-my5-etc.3794393).
-
-In the end it's your choice whether to use it, but as it's systemless, testing it is recommended, as removing the module will revert back to the previous state.
+Installing this module might have unintended consequences, such as lowered video quality.
+[Read more](https://forum.xda-developers.com/t/magisk-module-liboemcrypto-disabler-for-drm-protected-content-netflix-my5-etc.3794393)
