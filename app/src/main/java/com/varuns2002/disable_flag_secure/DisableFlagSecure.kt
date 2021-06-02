@@ -51,7 +51,7 @@ class DisableFlagSecure : IXposedHookLoadPackage {
      */
     override fun handleLoadPackage(loadPackageParam: LoadPackageParam?) {
         // Log Package Name
-        XposedBridge.log("Disabled FLAG_SECURE for: " + (loadPackageParam?.packageName ?: "null"))
+        if (debug) XposedBridge.log("Disabled FLAG_SECURE for: " + (loadPackageParam?.packageName ?: "null"))
 
         XposedHelpers.findAndHookMethod(
             Window::class.java, "setFlags", Int::class.javaPrimitiveType, Int::class.javaPrimitiveType,
