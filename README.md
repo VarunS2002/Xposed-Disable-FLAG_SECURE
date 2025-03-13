@@ -67,6 +67,7 @@ wouldn't allow it.
     - Reddit (Anonymous Browsing Mode)
     - Google Chrome (Incognito Mode)
     - Brave Browser (Incognito Mode)
+    - WhatsApp (View Once Media & Profile Picture)
 
 - This module may work on other apps too with or
   without [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboemcryptodisabler).
