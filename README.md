@@ -59,19 +59,6 @@ wouldn't allow it.
     - [LSPosed](https://github.com/LSPosed/LSPosed/)
     - [EdXposed](https://github.com/ElderDrivers/EdXposed/)
 
-- Apps Tested on:
-    - Amazon Prime Video
-    - Netflix ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
-    - Disney+ ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
-    - Telegram (Secret Chat & Disappearing Media)
-    - Reddit (Anonymous Browsing Mode)
-    - Google Chrome (Incognito Mode)
-    - Brave Browser (Incognito Mode)
-    - WhatsApp (View Once Media & Profile Picture)
-    - Firefox (Incognito Mode)
-    - Toffee OTT
-    - Booking.com
-
 - This module may work on other apps too with or
   without [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboemcryptodisabler).
   ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
@@ -84,6 +71,19 @@ wouldn't allow it.
     - https://github.com/veeti/DisableFlagSecure/
     - https://github.com/LSPosed/DisableFlagSecure/
     - https://gitlab.com/azhao12345/disableflagsecure/
+
+- Apps Tested on:
+    - Amazon Prime Video
+    - Netflix ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
+    - Disney+ ([Read Additional Instructions](#additional-information-on-drm-encrypted-content))
+    - Telegram (Secret Chat & Disappearing Media)
+    - Reddit (Anonymous Browsing Mode)
+    - Google Chrome (Incognito Mode)
+    - Brave Browser (Incognito Mode)
+    - WhatsApp (View Once Media & Profile Picture)
+    - Firefox (Incognito Mode)
+    - Toffee OTT
+    - Booking.com
 
 ### Additional Information on DRM encrypted content
 
@@ -101,3 +101,9 @@ recording.
 Installing this module might have unintended consequences, such as lowered video quality and a reduced Widevine security
 level.
 [Read more](https://forum.xda-developers.com/t/magisk-module-liboemcrypto-disabler-for-drm-protected-content-netflix-my5-etc.3794393)
+
+## Featured on:
+
+- [Best Android Mods for Non-Rooted Phones! (video)](https://youtu.be/80cRqjuNF-8)
+- [15 SECRET Apps You CAN'T FIND on the Google Playstore! (video)](https://youtu.be/xthkvsnNb-8)
+- [20 POWERFUL Apps for System Level Customization! (video)](https://youtu.be/9-snHD8FEqU)
