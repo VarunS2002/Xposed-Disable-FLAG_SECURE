@@ -21,13 +21,19 @@ wouldn't allow it.
 
 - Android 8.0+ (Oreo/SDK 26)
 
-- Xposed implementation installed properly like [EdXposed](https://github.com/ElderDrivers/EdXposed/)
-  and [LSPosed](https://github.com/LSPosed/LSPosed/)
+- Xposed implementation installed properly like [LSPosed](https://github.com/LSPosed/LSPosed/)
+  and [EdXposed](https://github.com/ElderDrivers/EdXposed/)
 
-- Untested but may work on Rootless Xposed implementations like [Tai Chi](https://github.com/taichi-framework/TaiChi/)
+- Untested but may work on Rootless Xposed implementations like [LSPatch](https://github.com/LSPosed/LSPatch)
+  and [Tai Chi](https://github.com/taichi-framework/TaiChi/)
 
 ## Usage:
 
+- LSPosed:
+    - Enable the module
+    - Select `System Framework`
+    - Select the target app in which you want to enable screenshots
+    - Reboot
 - EdXposed:
     - Normal Mode:
         - Enable the module and reboot
@@ -41,11 +47,6 @@ wouldn't allow it.
         - Do not select `Android System`
         - Do not select the target app in which you want to enable screenshots
         - Reboot
-- LSPosed:
-    - Enable the module
-    - Select `System Framework`
-    - Select the target app in which you want to enable screenshots
-    - Reboot
 
 ## Note:
 
@@ -55,9 +56,8 @@ wouldn't allow it.
 
 
 - Xposed Implementations Tested on:
-    - [EdXposed](https://github.com/ElderDrivers/EdXposed/)
     - [LSPosed](https://github.com/LSPosed/LSPosed/)
-
+    - [EdXposed](https://github.com/ElderDrivers/EdXposed/)
 
 - Apps Tested on:
     - Amazon Prime Video
@@ -68,6 +68,9 @@ wouldn't allow it.
     - Google Chrome (Incognito Mode)
     - Brave Browser (Incognito Mode)
     - WhatsApp (View Once Media & Profile Picture)
+    - Firefox (Incognito Mode)
+    - Toffee OTT
+    - Booking.com
 
 - This module may work on other apps too with or
   without [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboemcryptodisabler).
@@ -95,5 +98,6 @@ module [`liboemcrypto.so disabler`](https://github.com/Magisk-Modules-Repo/liboe
 device to not use hardware decryption and in combination with this module will enable screenshots, screen sharing and
 recording.
 
-Installing this module might have unintended consequences, such as lowered video quality.
+Installing this module might have unintended consequences, such as lowered video quality and a reduced Widevine security
+level.
 [Read more](https://forum.xda-developers.com/t/magisk-module-liboemcrypto-disabler-for-drm-protected-content-netflix-my5-etc.3794393)
